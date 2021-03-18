@@ -17,7 +17,7 @@ function StarFilter(){
     });
     return(
     <FormControl component="fieldset" style={{margin:"0 0 0 30px"}}>
-    <FormLabel component="legend">Star Rating</FormLabel>
+    <FormLabel component="legend" style={{marginBottom:"10px"}} >Star Rating</FormLabel>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={one} onChange={(event)=>setOne(event.target.checked)} />}

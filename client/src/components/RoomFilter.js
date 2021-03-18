@@ -4,6 +4,7 @@ function RoomFilter(){
     const [standard,setStandard] = useState(false);
     const [deluxe,setDeluxe] = useState(false);
     const [executive,setExecutive] = useState(false);
+    const [luxury,setLuxury] = useState(false);
     
     useEffect(()=>{
     //     console.log(laundry);
@@ -13,7 +14,7 @@ function RoomFilter(){
     
     return(
     <FormControl style={{margin:"0 0 0 30px"}}>
-    <FormLabel >Room Type</FormLabel>
+    <FormLabel style={{marginBottom:"10px"}}>Room Type</FormLabel>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={standard} onChange={(event)=>setStandard(event.target.checked)} />}
@@ -26,6 +27,10 @@ function RoomFilter(){
           <FormControlLabel
             control={<Checkbox checked={executive} onChange={(event)=>setExecutive(event.target.checked)}  />}
             label="Executive"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={luxury} onChange={(event)=>setLuxury(event.target.checked)}  />}
+            label="Luxury"
           />
         </FormGroup>
     </FormControl>);

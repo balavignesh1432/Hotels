@@ -29,7 +29,7 @@ function Home(){
                 </DialogTitle>
                 <DialogContent>
                     <Typography variant="body1">Budget ( ₹ )</Typography>
-                    <Slider value={price} onChange={(event,newValue)=>setPrice(newValue)} min={500} max={5000} step={100} valueLabelDisplay="auto" style={{margin:"10px 0 10px 0"}}/>
+                    <Slider value={price} onChange={(event,newValue)=>setPrice(newValue)} min={500} max={5000} step={100} valueLabelDisplay="auto" style={{margin:"20px 0 20px 0"}}/>
                     <FacilityFilter />
                     <StarFilter />
                     <RoomFilter />

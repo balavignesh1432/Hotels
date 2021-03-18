@@ -1,14 +1,14 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton } from '@material-ui/core';
+import { Pagination } from "@material-ui/lab";
 import {Favorite} from "@material-ui/icons";
 import data from '../Data';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import { useEffect, useState } from 'react';
 
 function Results(){
-    // console.log(data);
     const [currentPage,setCurrentPage]=useState(1);
     const [pages,setPages]=useState([]);
-    const pageSize=20;
+    const pageSize=12;
     const [currentData,setCurrentData]=useState([]);
     
     useEffect(()=>{
@@ -56,19 +56,16 @@ function Results(){
             </div>
           </CardContent>
           <CardActions style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-              {/* <div className="cardActions" > */}
               <IconButton >
               <Favorite />
               </IconButton>
               <a href={item.url} style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
-              {/* </div> */}
           </CardActions>
       </Card>);  
         })}
         </div>
-        <div style={{display:"flex",justifyContent:"center"}}>
-        <Button color="secondary" variant="outlined" onClick={()=>currentPage>1&&setCurrentPage(currentPage-1)}>Prev</Button>
-        <Button color="secondary" variant="contained" onClick={()=>setCurrentPage(currentPage+1)}>Next</Button>
+        <div style={{display:"flex",justifyContent:"center",margin:"10px 0 50px 0"}}>
+        <Pagination count={pages.length} page={currentPage} onChange={(event,value)=>setCurrentPage(value)} color="primary" size="large"/>
         </div>
     </div>
     );
