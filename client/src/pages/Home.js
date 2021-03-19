@@ -1,16 +1,33 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Results from '../components/Results';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import FacilityFilter from "../components/FacilityFilter";
-import StarFilter from "../components/StarFilter"
-import RoomFilter from "../components/RoomFilter";
+import Filters from '../components/Filters';
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slider, TextField, Typography } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+ import {applyFilter} from '../redux/actions/index';
 
 function Home(){
     const [filterOpen,setFilterOpen]=useState(false);
     const [city,setCity]=useState('');
-    const [price, setPrice] = React.useState([1000, 3000]);
+    
+    const budget = useSelector((state)=>state.budget);
+    const facilities = useSelector((state)=>state.facilities);
+    const stars = useSelector((state)=>state.stars);
+    const rooms = useSelector((state)=>state.rooms);
+
+    const dispatch = useDispatch();
+    
+    function handleFilter(){
+        setFilterOpen(false);
+        console.log({facilities,stars,rooms,budget});
+        dispatch(applyFilter({facilities,stars,rooms,budget}));
+    }
+
+    useEffect(()=>{
+
+    },[]);
+    
     return (
         <div className="Home">
             <div className="topSection" style={{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center",margin:"50px 50px 0 50px"}} >
@@ -28,14 +45,10 @@ function Home(){
                     Filters
                 </DialogTitle>
                 <DialogContent>
-                    <Typography variant="body1">Budget ( ₹ )</Typography>
-                    <Slider value={price} onChange={(event,newValue)=>setPrice(newValue)} min={500} max={5000} step={100} valueLabelDisplay="auto" style={{margin:"20px 0 20px 0"}}/>
-                    <FacilityFilter />
-                    <StarFilter />
-                    <RoomFilter />
+                    <Filters />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={()=>{setFilterOpen(false)}} color="primary" variant="contained" size="large">Apply</Button>
+                    <Button onClick={handleFilter} color="primary" variant="contained" size="large">Apply</Button>
                 </DialogActions>    
             </Dialog>
             <Results />

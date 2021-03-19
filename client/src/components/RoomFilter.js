@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl,FormLabel,FormGroup,FormControlLabel,Checkbox} from "@material-ui/core";
+import { useDispatch, useSelector } from 'react-redux';
+import {setRooms} from '../redux/actions/index'
+
 function RoomFilter(){
-    const [standard,setStandard] = useState(false);
-    const [deluxe,setDeluxe] = useState(false);
-    const [executive,setExecutive] = useState(false);
-    const [luxury,setLuxury] = useState(false);
+    const rooms = useSelector((state)=>state.rooms);
+    const dispatch = useDispatch();
+
+    const [standard,setStandard] = useState(rooms.standard);
+    const [deluxe,setDeluxe] = useState(rooms.deluxe);
+    const [executive,setExecutive] = useState(rooms.executive);
+    const [luxury,setLuxury] = useState(rooms.luxury);
     
     useEffect(()=>{
-    //     console.log(laundry);
-    //     console.log(wifi);
-    //     console.log(parking);
-    });
+        dispatch(setRooms({standard,deluxe,executive,luxury}))
+    },[dispatch,standard,deluxe,executive,luxury]);
     
     return(
     <FormControl style={{margin:"0 0 0 30px"}}>

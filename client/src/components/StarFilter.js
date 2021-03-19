@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl,FormLabel,FormGroup,FormControlLabel,Checkbox} from "@material-ui/core";
+import { useDispatch, useSelector } from 'react-redux';
+import { setStars } from "../redux/actions/index";
 
 function StarFilter(){
-    const [one,setOne] = useState(false);
-    const [two,setTwo] = useState(false);
-    const [three,setThree] = useState(false);
-    const [four,setFour] = useState(false);
-    const [five,setFive] = useState(false);
+    const stars = useSelector((state)=>state.stars);
+    const dispatch = useDispatch(); 
+
+    const [one,setOne] = useState(stars.one);
+    const [two,setTwo] = useState(stars.two);
+    const [three,setThree] = useState(stars.three);
+    const [four,setFour] = useState(stars.four);
+    const [five,setFive] = useState(stars.five);
 
     // function handleChange(){
     // }
     useEffect(()=>{
-        // console.log(laundry);
-        // console.log(wifi);
-        // console.log(parking);
-    });
+        dispatch(setStars({one,two,three,four,five}));
+    },[dispatch,one,two,three,four,five]);
+
     return(
     <FormControl component="fieldset" style={{margin:"0 0 0 30px"}}>
     <FormLabel component="legend" style={{marginBottom:"10px"}} >Star Rating</FormLabel>
