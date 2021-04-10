@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FormControl,FormLabel,FormGroup,FormControlLabel,Checkbox} from "@material-ui/core";
+import { FormControl,FormLabel,FormGroup,FormControlLabel,Checkbox,useMediaQuery,useTheme} from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import {setRooms} from '../redux/actions/index'
 
 function RoomFilter(){
+    const theme=useTheme();
+    const isMobile= useMediaQuery(theme.breakpoints.down("sm"));
+
     const rooms = useSelector((state)=>state.rooms);
     const dispatch = useDispatch();
 
@@ -17,7 +20,7 @@ function RoomFilter(){
     },[dispatch,standard,deluxe,executive,luxury]);
     
     return(
-    <FormControl style={{margin:"0 0 0 30px"}}>
+    <FormControl style={!isMobile?{margin:"0 0 0 30px"}:{marginTop:"20px"}}>
     <FormLabel style={{marginBottom:"10px"}}>Room Type</FormLabel>
         <FormGroup>
           <FormControlLabel

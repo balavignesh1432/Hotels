@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FormControl,FormLabel,FormGroup,FormControlLabel,Checkbox} from "@material-ui/core";
+import { FormControl,FormLabel,FormGroup,FormControlLabel,Checkbox,useTheme,useMediaQuery} from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { setStars } from "../redux/actions/index";
 
 function StarFilter(){
+    const theme=useTheme();
+    const isMobile= useMediaQuery(theme.breakpoints.down("sm"));
     const stars = useSelector((state)=>state.stars);
     const dispatch = useDispatch(); 
 
@@ -20,7 +22,7 @@ function StarFilter(){
     },[dispatch,one,two,three,four,five]);
 
     return(
-    <FormControl component="fieldset" style={{margin:"0 0 0 30px"}}>
+    <FormControl component="fieldset" style={!isMobile?{margin:"0 0 0 30px"}:{}}>
     <FormLabel component="legend" style={{marginBottom:"10px"}} >Star Rating</FormLabel>
         <FormGroup>
           <FormControlLabel

@@ -22,7 +22,8 @@ const setRooms = (rooms) => async (dispatch) =>{
 
 const applyFilter = (filters) => async (dispatch) =>{
     try{
-        const {data} = await axios.get(url+"/filters",filters);
+        console.log(filters);
+        const {data} = await axios.post(url+"/filters",filters);
         console.log(data);
     }catch(err){
         console.log(err.message);
