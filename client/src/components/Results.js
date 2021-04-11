@@ -39,26 +39,26 @@ function Results(){
           return (
             <Card key={index} style={!isMobile?{width:"30%",marginTop:"30px"}:{width:"100%",marginTop:"20px"}} elevation={10}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <CardHeader title={item.name} subheader={item.city}/>
+            <CardHeader title={item.property_name} subheader={item.city}/>
             <div style={{display:"flex",marginRight:"10px"}}>
                       <StarRateIcon />
-                      <Typography variant="body1" >{item.star[0]}</Typography>      
+                      <Typography variant="body1" >{item.hotel_star_rating[0]}</Typography>      
                   </div>
             </div>
             <CardMedia 
             component="img"
-            image={item.image} 
+            image={item.image_urls.split(/[|]/)[0]} 
             title="Hotel Image"
             style={isMobile?{height:"200px",width:"100%"}:{height:"250px",width:"100%"}}    
             />
             <CardContent>
               <div className="details" style={{display:"flex",justifyContent:"space-between"}}>
                 <div>
-                  <Typography variant="body1">{item.type}</Typography>
+                  <Typography variant="body1">{item.room_type}</Typography>
                   <Typography variant="body2">{item.area}</Typography>
                 </div>
                 <div>
-                  <Typography variant="h6">₹{item.price}</Typography>
+                  <Typography variant="h6">₹{item.Cost}</Typography>
                 </div>
               </div>
             </CardContent>
@@ -66,7 +66,7 @@ function Results(){
                 <IconButton >
                 <Favorite />
                 </IconButton>
-                <a href={item.url} style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
+                <a href={item.pageurl} style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
             </CardActions>
       </Card>);  
         })}
