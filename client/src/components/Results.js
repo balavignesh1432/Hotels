@@ -1,19 +1,21 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton } from '@material-ui/core';
 import { Pagination } from "@material-ui/lab";
 import {Favorite} from "@material-ui/icons";
-import data from '../Data';
+// import data from '../Data';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function Results(){
     const [currentPage,setCurrentPage]=useState(1);
     const [pages,setPages]=useState([]);
     const pageSize=12;
     const [currentData,setCurrentData]=useState([]);
+    const data= useSelector((state)=>state.result);
     
     useEffect(()=>{
         setCurrentData(data.slice((currentPage-1)*pageSize,currentPage*pageSize));
-    },[currentPage]);
+    },[currentPage,data]);
 
     useEffect(()=>{
         setPages(()=>{
@@ -23,7 +25,7 @@ function Results(){
             }
             return pageNumbers;
         });
-    },[])
+    },[data]);
     // console.log(pages);
     
     return(

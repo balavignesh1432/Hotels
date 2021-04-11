@@ -19,7 +19,7 @@ function Filters(){
     return (
         <div className="Filters">    
             <Typography variant="body1">Budget ( ₹ )</Typography>
-            <Slider value={price} onChange={(event,newValue)=>setPrice(newValue)} min={500} max={10000} step={200} valueLabelDisplay="auto" style={{margin:"20px 0 20px 0"}}/>
+            <Slider value={price} onChange={(event,newValue)=>setPrice(newValue)} min={500} max={10000} step={100} valueLabelDisplay="auto" style={{margin:"20px 0 20px 0"}}/>
             <FacilityFilter />
             <StarFilter />
             <RoomFilter />

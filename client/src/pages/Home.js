@@ -41,12 +41,12 @@ function Home(){
     return (
         <div className="Home">
             <div className="topSection" style={!isMobile?{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center",margin:"50px 50px 0 50px"}:{display:"flex",flexDirection:"column",alignItems:"center"}} >
-            <div style={{marginTop:"30px"}}>
-            <Typography variant={!isMobile?"h3":"h5"}>Where you want to stay?</Typography>   
+            <div style={isMobile?{marginTop:"30px"}:{}}>
+            <Typography variant={!isMobile?"h3":"h5"}>Where do you want to stay?</Typography>   
             </div>
-            <div className="searchSection" style={!isMobile?{display:"flex"}:{width:"100%",display:"flex",alignItems:"center",marginTop:"20px",justifyContent:"space-around"}}>
-            <TextField onChange={(event)=>setSearch(event.target.value)} value={search} label="City" variant="filled" style={!isMobile?{width:"500px"}:{width:"70%"}}/>
-            <Button color="secondary" variant="contained" style={{marginLeft:"10px"}} size={!isMobile?"large":"small"} onClick={handleSearch}>Search</Button>
+            <div className="searchSection" style={!isMobile?{display:"flex"}:{width:"100%",display:"flex",alignItems:"stretch",marginTop:"20px",justifyContent:"space-around"}}>
+            <TextField onChange={(event)=>setSearch(event.target.value.trim())} value={search} label="City" variant="filled" style={!isMobile?{width:"500px"}:{width:"70%"}}/>
+            <Button color="secondary" variant="contained" style={{marginLeft:"10px"}} size={!isMobile?"large":"medium"} onClick={handleSearch}>Search</Button>
             </div>
             </div>
             <div className="filterSection" style={!isMobile?{width:"95%",margin:"auto",marginTop:"20px",display:"flex",justifyContent:"space-between"}:{width:"95%",margin:"auto",marginTop:"20px",display:"flex",justifyContent:"space-between"}}>
