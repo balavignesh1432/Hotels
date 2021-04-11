@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton, useTheme, useMediaQuery } from '@material-ui/core';
 import { Pagination } from "@material-ui/lab";
 import {Favorite} from "@material-ui/icons";
 // import data from '../Data';
@@ -7,11 +7,15 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function Results(){
+    const theme=useTheme();
+    const isMobile= useMediaQuery(theme.breakpoints.down("xs"));
+
     const [currentPage,setCurrentPage]=useState(1);
     const [pages,setPages]=useState([]);
     const pageSize=12;
     const [currentData,setCurrentData]=useState([]);
     const data= useSelector((state)=>state.result);
+
     
     useEffect(()=>{
         setCurrentData(data.slice((currentPage-1)*pageSize,currentPage*pageSize));
@@ -30,10 +34,10 @@ function Results(){
     
     return(
         <div>
-        <div className="results" style={{display:"flex",flexDirection:"row",flexWrap:"wrap",margin:"10px 0 50px 55px"}}>
+        <div className="results" style={{display:"flex",flexDirection:"row",flexWrap:"wrap",justifyContent:"space-evenly",margin:"auto",width:"90%"}}>
         {currentData.map((item,index)=>{
           return (
-            <Card key={index} style={{maxWidth:"435px",margin:"60px 50px 0 0"}} elevation={10}>
+            <Card key={index} style={!isMobile?{width:"30%",marginTop:"30px"}:{width:"100%",marginTop:"20px"}} elevation={10}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <CardHeader title={item.name} subheader={item.city}/>
             <div style={{display:"flex",marginRight:"10px"}}>
@@ -45,7 +49,7 @@ function Results(){
             component="img"
             image={item.image} 
             title="Hotel Image"
-            style={{height:"300px",maxWidth:"435px"}}    
+            style={isMobile?{height:"200px",width:"100%"}:{height:"250px",width:"100%"}}    
             />
             <CardContent>
               <div className="details" style={{display:"flex",justifyContent:"space-between"}}>
@@ -67,7 +71,7 @@ function Results(){
       </Card>);  
         })}
         </div>
-          <div style={{display:"flex",justifyContent:"center",margin:"10px 0 50px 0"}}>
+          <div style={{display:"flex",justifyContent:"center",margin:"30px 0 30px 0"}}>
           <Pagination count={pages.length} page={currentPage} onChange={(event,value)=>setCurrentPage(value)} color="primary" size="large"/>
           </div>
     </div>
