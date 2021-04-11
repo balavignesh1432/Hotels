@@ -40,8 +40,8 @@ function Home(){
     
     return (
         <div className="Home">
-            <div className="topSection" style={!isMobile?{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center",margin:"50px 50px 0 50px"}:{display:"flex",flexDirection:"column",alignItems:"center"}} >
-            <div style={isMobile?{marginTop:"30px"}:{}}>
+            <div className="topSection" style={!isMobile?{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center",width:"90%",margin:"auto",marginTop:"50px"}:{display:"flex",flexDirection:"column",alignItems:"center",width:"90%",margin:"auto",marginTop:"30px"}} >
+            <div>
             <Typography variant={!isMobile?"h3":"h5"}>Where do you want to stay?</Typography>   
             </div>
             <div className="searchSection" style={!isMobile?{display:"flex"}:{width:"100%",display:"flex",alignItems:"stretch",marginTop:"20px",justifyContent:"space-around"}}>
