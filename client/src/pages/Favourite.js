@@ -1,24 +1,28 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton, Grid } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton, useTheme, useMediaQuery, Grid } from '@material-ui/core';
 import { Pagination } from "@material-ui/lab";
-import {Favorite} from "@material-ui/icons";
+import {Delete} from "@material-ui/icons";
 // import data from '../Data';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {postFavourite} from '../redux/actions/index';
-function Results(){
-    // const theme=useTheme();
-    // const isMobile= useMediaQuery(theme.breakpoints.down("xs"));
+import {deleteFavourite, getFavourite} from '../redux/actions/index';
+
+function Favourite(){
+    const theme=useTheme();
+    const isMobile= useMediaQuery(theme.breakpoints.down("xs"));
 
     const [currentPage,setCurrentPage]=useState(1);
     const [pages,setPages]=useState([]);
     const pageSize=12;
     const [currentData,setCurrentData]=useState([]);
-    const data= useSelector((state)=>state.result);
+    const data= useSelector((state)=>state.favourites);
     const username=useSelector(state=>state.current);
     const dispatch= useDispatch();
 
-    
+    useEffect(()=>{
+      dispatch(getFavourite(username));
+    },[dispatch,username]);
+
     useEffect(()=>{
         setCurrentData(data.slice((currentPage-1)*pageSize,currentPage*pageSize));
     },[currentPage,data]);
@@ -33,17 +37,18 @@ function Results(){
         });
     },[data]);
     // console.log(pages);
-    function handleFavourite(uniq_id){
-      dispatch(postFavourite({username,uniq_id}));
+    function handleDelete(uniq_id){
+      dispatch(deleteFavourite({username,uniq_id}));
     }
     
     return(
         <div>
+        <Typography variant={!isMobile?'h2':'h4'} style={{marginTop:"20px",textAlign:"center"}}>Favourites</Typography>
         <div className="results" style={{margin:"auto",width:"90%",marginTop:"20px"}}>
         <Grid container spacing={4}>
         {currentData.map((item,index)=>{
           return (
-            <Grid item xs={12} sm={6} md={3} xl={2} key={index}>
+            <Grid item xs={12} sm={6} md={4} xl={2} key={index}>
             <Card style={{width:"100%"}} elevation={10}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <CardHeader title={item.property_name} subheader={item.city}/>
@@ -70,8 +75,8 @@ function Results(){
               </div>
             </CardContent>
             <CardActions style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-                <IconButton onClick={()=>handleFavourite(item.uniq_id)}>
-                <Favorite />
+                <IconButton onClick={()=>handleDelete(item.uniq_id)}>
+                <Delete />
                 </IconButton>
                 <a href={item.pageurl} style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
             </CardActions>
@@ -87,4 +92,4 @@ function Results(){
     );
 }
 
-export default Results;
+export default Favourite;

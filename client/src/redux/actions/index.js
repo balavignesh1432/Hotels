@@ -31,4 +31,68 @@ const applyFilter = (filters) => async (dispatch) =>{
     }
 }
 
-export {setCity,setFacilties,setStars,setRooms,setBudget,applyFilter};
+const register = (details) => async (dispatch) =>{
+    try{
+        console.log(details);
+        const {data}=await axios.post(url+"/user/register",details);
+        console.log(data);
+        if(data.status===1){
+            dispatch({type:"SET_REGISTER"});
+        }else{
+            alert("User already exists!");
+        }
+    }catch(err){
+        console.log(err.message);
+    }
+}
+
+const login = (details) => async (dispatch) =>{
+    try{
+        console.log(details);
+        const {data}= await axios.post(url+"/user/login",details);
+        console.log(data);
+        if(data.status===1){
+            dispatch({type:"SET_LOGIN"});
+        }else{
+            alert("Invalid Username or password!");
+        }
+    }catch(err){
+        console.log(err.message);
+    }
+}
+
+
+const getFavourite = (username) => async (dispatch) =>{
+    try{
+        console.log(username);
+        const {data} = await axios.post(url+'/favourite/get',username);
+        dispatch({type:"SET_FAVOURITE",payload:data});
+    }catch(err){
+        console.log(err.message);
+    }
+}
+
+const postFavourite = (item) => async (dispatch) =>{
+    try{
+        console.log(item);
+        const {data} = await axios.post(url+'/favourite/post',item);
+        if(data.status === 1){
+            dispatch(getFavourite(item.username));
+        }
+    }catch(err){
+
+    }
+}
+
+const deleteFavourite = (item) => async (dispatch) =>{
+    try{
+        console.log(item);
+        const {data} = await axios.post(url+'/favourite/delete',item);
+        if(data.status === 1){
+            dispatch(getFavourite(item.username));
+        }
+    }catch(err){
+
+    }
+}
+export {setCity,setFacilties,setStars,setRooms,setBudget,applyFilter,register,login,postFavourite,getFavourite,deleteFavourite};
