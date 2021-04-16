@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
   const [username,setUsername] = useState('');
-  const [email,setEmail] = useState('');
+  const [emailid,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const history= useHistory();
   const status = useSelector((state)=>state.register);
@@ -49,7 +49,7 @@ export default function Register() {
     },[status,history]);
 
   function handleSubmit(){
-    dispatch(register({username,email,password}));
+    dispatch(register({username,emailid,password}));
   }
 
   return (
@@ -62,7 +62,7 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <div style={{width:"100%"}}>    
+        <div style={{width:"100%",marginTop:"20px"}}>    
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -78,7 +78,7 @@ export default function Register() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                value={email}
+                value={emailid}
                 onChange={(event)=>setEmail(event.target.value.trim())}
                 required
                 fullWidth

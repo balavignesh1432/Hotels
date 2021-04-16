@@ -1,9 +1,11 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton, Grid } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,IconButton, Grid,Snackbar } from '@material-ui/core';
 import { Pagination } from "@material-ui/lab";
 import {Favorite} from "@material-ui/icons";
 // import data from '../Data';
 import StarRateIcon from '@material-ui/icons/StarRate';
-import { useEffect, useState } from 'react';
+import CloseIcon from '@material-ui/icons/Close';
+
+import React,{ useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {postFavourite} from '../redux/actions/index';
 function Results(){
@@ -12,6 +14,8 @@ function Results(){
 
     const [currentPage,setCurrentPage]=useState(1);
     const [pages,setPages]=useState([]);
+    const [open,setOpen]=useState(false);
+
     const pageSize=12;
     const [currentData,setCurrentData]=useState([]);
     const data= useSelector((state)=>state.result);
@@ -35,7 +39,14 @@ function Results(){
     // console.log(pages);
     function handleFavourite(uniq_id){
       dispatch(postFavourite({username,uniq_id}));
+      setOpen(true);
     }
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
     
     return(
         <div>
@@ -44,7 +55,7 @@ function Results(){
         {currentData.map((item,index)=>{
           return (
             <Grid item xs={12} sm={6} md={3} xl={2} key={index}>
-            <Card style={{width:"100%"}} elevation={10}>
+            <Card style={{width:"100%",height:"100%"}} elevation={10}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <CardHeader title={item.property_name} subheader={item.city}/>
             <div style={{display:"flex",marginRight:"10px"}}>
@@ -83,6 +94,23 @@ function Results(){
           <div style={{display:"flex",justifyContent:"center",margin:"30px 0 30px 0"}}>
           <Pagination count={pages.length} page={currentPage} onChange={(event,value)=>setCurrentPage(value)} color="primary" size="large"/>
           </div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            open={open}
+            autoHideDuration={3000}
+            onClose={handleClose}
+            message="Added to Favourites"
+            action={
+              <React.Fragment>
+                <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
     </div>
     );
 }

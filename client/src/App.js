@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Favourite from './pages/Favourite';
+import Landing from './pages/Landing';
 
 import {BrowserRouter as Router,Route,Switch,Link} from 'react-router-dom';
 function App() {
@@ -15,16 +16,18 @@ function App() {
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h4" style={{flex:"1"}}>Hotels</Typography>
-                <Link to="/register" style={{textDecoration:"none"}}><Button>Register</Button></Link>
-                <Link to="/login" style={{textDecoration:"none"}}><Button>Login</Button></Link>
+                <Link to="/register" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Register</Button></Link>
+                <Link to="/login" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Login</Button></Link>
               </Toolbar>
             </AppBar>
+            <Landing />
             </Route>
             <Route path="/register">
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h4" style={{flex:"1"}}>Hotels</Typography>
-                <Link to="/login" style={{textDecoration:"none"}}><Button>Login</Button></Link>
+                <Link to="/login" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Login</Button></Link>
+                <Link to="/" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Home</Button></Link>
               </Toolbar>
             </AppBar>
               <Register />  
@@ -33,7 +36,8 @@ function App() {
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h4" style={{flex:"1"}}>Hotels</Typography>
-                <Link to="/register" style={{textDecoration:"none"}}><Button>Register</Button></Link>
+                <Link to="/register" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Register</Button></Link>
+                <Link to="/" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Home</Button></Link>
               </Toolbar>
             </AppBar>
               <Login />  
@@ -42,7 +46,8 @@ function App() {
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h4" style={{flex:"1"}}>Hotels</Typography>
-                <Link to="/favourite" style={{textDecoration:"none"}}><Button>Favourite</Button></Link>
+                <Link to="/favourite" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Favourites</Button></Link>
+                <Link to="/" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Logout</Button></Link>
               </Toolbar>
             </AppBar>
               <Home />  
@@ -51,13 +56,15 @@ function App() {
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h4" style={{flex:"1"}}>Hotels</Typography>
-                <Link to="/hotels" style={{textDecoration:"none"}}><Button>Hotels</Button></Link>
+                <Link to="/hotels" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Hotels</Button></Link>
+                <Link to="/" style={{textDecoration:"none"}}><Button style={{color:"white"}}>Logout</Button></Link>
               </Toolbar>
             </AppBar>
               <Favourite />  
             </Route>
           </Switch>
-        </Router>  
+        </Router>
+        <Typography variant="body2" color="textSecondary" style={{textAlign:"center",marginTop:"20px"}}>© Copyright Bala Vignesh & Surya Prasath</Typography>  
       </div>
   );
 }

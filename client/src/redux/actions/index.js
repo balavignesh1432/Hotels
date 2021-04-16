@@ -53,6 +53,7 @@ const login = (details) => async (dispatch) =>{
         console.log(data);
         if(data.status===1){
             dispatch({type:"SET_LOGIN"});
+            dispatch({type:"SET_CURRENT",payload:details.username});
         }else{
             alert("Invalid Username or password!");
         }
@@ -65,7 +66,7 @@ const login = (details) => async (dispatch) =>{
 const getFavourite = (username) => async (dispatch) =>{
     try{
         console.log(username);
-        const {data} = await axios.post(url+'/favourite/get',username);
+        const {data} = await axios.post(url+'/favourite/get',{username});
         dispatch({type:"SET_FAVOURITE",payload:data});
     }catch(err){
         console.log(err.message);
