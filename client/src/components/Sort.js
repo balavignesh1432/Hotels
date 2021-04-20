@@ -48,7 +48,7 @@ function Sort(){
                 value="ascending"
                 onChange={handleAsc}
             />
-            <Typography>Low to High</Typography>
+            <Typography>Low to high</Typography>
             </div>
             <div style={{display:"flex",width:"200px",alignItems:"center"}}>
             <Radio 
@@ -56,7 +56,7 @@ function Sort(){
                 value="descending"
                 onChange={handleDesc}
             />
-            <Typography>Low to High</Typography>
+            <Typography>High to low</Typography>
             </div>
             <div style={{display:"flex",width:"200px",alignItems:"center"}}>
             <Radio 

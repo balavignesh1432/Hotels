@@ -1,5 +1,4 @@
 const express = require('express');
-const mysql = require('mysql');
 require('dotenv').config()
 const cors = require('cors');
 
@@ -21,8 +20,6 @@ app.use('/user',userRouter)
 const favouriteRouter = require('./routes/favourite')
 app.use('/favourite',favouriteRouter)
 
-
-
 app.listen(port,()=>{
-    console.log(`Serever started on port ${port}`);
+    console.log(`Server started on port ${port}`);
 })

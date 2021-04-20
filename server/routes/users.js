@@ -33,8 +33,14 @@ router.route('/register').post((req,res)=>{
     var data = {status : 0}
     var query = 'INSERT INTO users SET ?'
     db.query(query,body, function (err, result) {
-        if (err) res.send(data);
-        else{
+        if (err){
+            if(err.sqlState==45000){
+                data.status=2;
+                res.send(data);
+            }else{
+                res.send(data);
+            }
+        }else{
             data.status=1
             res.send(data)
         }
@@ -61,7 +67,5 @@ router.route('/login').post((req,res)=>{
         }
       });     
 })
-
-
 
 module.exports = router

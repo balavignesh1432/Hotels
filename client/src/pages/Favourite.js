@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import React,{ useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {deleteFavourite, getFavourite} from '../redux/actions/index';
+import { useHistory } from 'react-router';
 
 function Favourite(){
     const theme=useTheme();
@@ -23,6 +24,13 @@ function Favourite(){
     const username=useSelector(state=>state.current);
     
     const dispatch= useDispatch();
+    const history=useHistory();
+    
+    useEffect(()=>{
+      if(username===''){
+        history.push("/login");
+      }
+    },[history,username]); 
 
     useEffect(()=>{
       dispatch(getFavourite(username));
@@ -93,7 +101,7 @@ function Favourite(){
                 <IconButton onClick={()=>handleDelete(item.uniq_id)}>
                 <Delete />
                 </IconButton>
-                <a href={item.pageurl} style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
+                <a href={item.pageurl} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
             </CardActions>
       </Card>
       </Grid>);  

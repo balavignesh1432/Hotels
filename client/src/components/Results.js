@@ -8,10 +8,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import React,{ useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {postFavourite} from '../redux/actions/index';
+import { useHistory } from 'react-router';
 function Results(){
     // const theme=useTheme();
     // const isMobile= useMediaQuery(theme.breakpoints.down("xs"));
-
+    const history=useHistory();
     const [currentPage,setCurrentPage]=useState(1);
     const [pages,setPages]=useState([]);
     const [open,setOpen]=useState(false);
@@ -22,7 +23,12 @@ function Results(){
     const username=useSelector(state=>state.current);
     const dispatch= useDispatch();
 
-    
+    useEffect(()=>{
+        if(username===''){
+          history.push("/login");
+        }
+    },[history,username]); 
+
     useEffect(()=>{
         setCurrentData(data.slice((currentPage-1)*pageSize,currentPage*pageSize));
     },[currentPage,data]);
@@ -84,7 +90,7 @@ function Results(){
                 <IconButton onClick={()=>handleFavourite(item.uniq_id)}>
                 <Favorite />
                 </IconButton>
-                <a href={item.pageurl} style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
+                <a href={item.pageurl} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}><Button color="secondary" variant="outlined">View</Button></a>
             </CardActions>
       </Card>
       </Grid>);  

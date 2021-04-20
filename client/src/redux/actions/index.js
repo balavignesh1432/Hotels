@@ -38,6 +38,8 @@ const register = (details) => async (dispatch) =>{
         console.log(data);
         if(data.status===1){
             dispatch({type:"SET_REGISTER"});
+        }else if(data.status===2){
+            alert("Enter valid Email Address!");
         }else{
             alert("User already exists!");
         }

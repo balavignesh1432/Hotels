@@ -47,7 +47,11 @@ export default function Login() {
   },[history,status]);
 
   function handleLogin(){
+    if(username!=='' || password!==''){
         dispatch(login({username,password}));
+    }else{
+        alert('Username or Password cannot be empty!');
+    }
   }
 
   return (
